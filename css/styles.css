@@ -1,0 +1,910 @@
+/* ==========================================================================
+   CSS Variables / Design System
+   ========================================================================== */
+:root {
+    /* Amazon Colors (Primary) */
+    --color-primary: #232f3e;
+    /* Amazon Dark Navy Header */
+    --color-secondary: #37475a;
+    /* Amazon Lighter Navy Header */
+    --color-accent: #febd69;
+    /* Amazon Yellow */
+    --color-accent-hover: #f3a847;
+    /* Amazon Orange Hover/Buy */
+
+    /* UI Surface & Background */
+    --color-background: #eaeded;
+    /* Amazon Light Grey Background */
+    --color-surface: #ffffff;
+    /* White panels */
+    --color-border: #e7e7e7;
+
+    /* Text Colors */
+    --color-text-main: #0f1111;
+    /* Amazon Dark text */
+    --color-text-muted: #565959;
+    /* Amazon gray text */
+    --color-text-info: #007185;
+    /* Amazon blue links/ratings */
+    --color-link: #007185;
+
+    /* Status & Highlights */
+    --color-success: #067d62;
+    /* Green status */
+    --color-error: #B12704;
+    /* Red price/error */
+    --color-discount: #cc0c39;
+    /* Amazon Red for labels */
+
+    /* Typography - Professional & Modern */
+    --font-main: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    --font-size-xs: 0.75rem;
+    --font-size-sm: 0.8125rem;
+    --font-size-md: 0.9375rem;
+    --font-size-lg: 1.125rem;
+    --font-size-xl: 1.375rem;
+    --font-size-xxl: 1.75rem;
+
+    /* Spacing */
+    --space-xs: 0.25rem;
+    --space-sm: 0.5rem;
+    --space-md: 0.75rem;
+    --space-lg: 1rem;
+    --space-xl: 1.5rem;
+    --space-xxl: 2.5rem;
+
+    /* Effects */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 20px;
+    --radius-full: 9999px;
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.1);
+    --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    --bottom-nav-height: 60px;
+    --header-height: 100px;
+}
+
+/* ==========================================================================
+   Reset & Base Styles
+   ========================================================================== */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-main);
+    background-color: var(--color-background);
+    color: var(--color-text-main);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    padding-bottom: calc(var(--bottom-nav-height) + var(--space-md));
+    /* Space for mobile nav */
+}
+
+@media (min-width: 768px) {
+    body {
+        padding-bottom: 0;
+    }
+}
+
+/* No bottom nav on desktop */
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: var(--transition);
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+button {
+    cursor: pointer;
+    font-family: inherit;
+    border: none;
+    background: none;
+}
+
+/* ==========================================================================
+   Layout System
+   ========================================================================== */
+.container {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 var(--space-md);
+}
+
+.section {
+    padding: var(--space-lg) 0;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-col {
+    flex-direction: column;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.gap-sm {
+    gap: var(--space-sm);
+}
+
+.gap-md {
+    gap: var(--space-md);
+}
+
+.gap-lg {
+    gap: var(--space-lg);
+}
+
+/* Horizontal scrolling slider for App-like categories */
+.horizontal-slider {
+    display: flex;
+    overflow-x: auto;
+    gap: var(--space-md);
+    padding: var(--space-sm) 0 var(--space-md) 0;
+    scrollbar-width: none;
+    /* Firefox */
+    -webkit-overflow-scrolling: touch;
+}
+
+.horizontal-slider::-webkit-scrollbar {
+    display: none;
+}
+
+.category-item {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 70px;
+    cursor: pointer;
+}
+
+.category-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--color-surface);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--space-xs);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+}
+
+.category-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.category-name {
+    font-size: var(--font-size-xs);
+    font-weight: 500;
+    text-align: center;
+}
+
+
+/* Grid Utilities - Responsive Product Grid */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    /* Mobile default is 2 columns like Flipkart */
+    gap: var(--space-md);
+}
+
+@media (min-width: 640px) {
+    .product-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--space-lg);
+    }
+}
+
+@media (min-width: 1024px) {
+    .product-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (min-width: 1280px) {
+    .product-grid {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+/* ==========================================================================
+   App Interface Components
+   ========================================================================== */
+
+/* App Header (Amazon Inspired) */
+.app-header {
+    background-color: var(--color-primary);
+    padding: var(--space-sm) 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-sm);
+    gap: var(--space-md);
+}
+
+.header-logo {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--color-surface);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    letter-spacing: -0.5px;
+    font-style: italic;
+}
+
+.header-actions {
+    display: flex;
+    gap: var(--space-lg);
+    align-items: center;
+    color: var(--color-surface);
+}
+
+.icon-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    position: relative;
+    cursor: pointer;
+}
+
+.icon-label {
+    font-size: 10px;
+    font-weight: 700;
+}
+
+/* Rounded White Search Bar */
+.search-container {
+    display: flex;
+    align-items: center;
+    background: var(--color-surface);
+    border-radius: var(--radius-md);
+    padding: 2px;
+    flex: 1;
+    overflow: hidden;
+    height: 44px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid #ddd;
+}
+
+.search-input {
+    border: none;
+    background: transparent;
+    width: 100%;
+    padding: 0 12px;
+    font-size: var(--font-size-md);
+    outline: none;
+    color: var(--color-text-main);
+}
+
+.search-btn {
+    background: var(--color-accent);
+    padding: 0 16px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-main);
+    cursor: pointer;
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+
+.search-btn:hover {
+    background: var(--color-accent-hover);
+}
+
+.icon-btn {
+    position: relative;
+    color: var(--color-surface);
+}
+
+.badge-count {
+    position: absolute;
+    top: -5px;
+    right: -8px;
+    background: var(--color-accent-hover);
+    color: var(--color-text-main);
+    font-size: 11px;
+    font-weight: bold;
+    height: 18px;
+    width: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: var(--bottom-nav-height);
+    background: #ffffff;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    padding-bottom: env(safe-area-inset-bottom);
+    border-top: 1px solid var(--color-border);
+}
+
+@media (min-width: 768px) {
+    .bottom-nav {
+        display: none;
+    }
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--color-text-main);
+    font-size: 11px;
+    font-weight: 500;
+    gap: 4px;
+    padding: 8px 12px;
+}
+
+.nav-item.active {
+    color: var(--color-link);
+    border-top: 3px solid var(--color-link);
+    margin-top: -3px;
+}
+
+/* Badges */
+.badge-smart {
+    background-color: var(--color-accent);
+    color: #1a6b5a;
+    padding: 2px 6px;
+    border-radius: var(--radius-sm);
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+/* Buttons */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 16px;
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    border-radius: var(--radius-sm);
+    transition: var(--transition);
+}
+
+.btn-primary {
+    background-color: var(--color-accent);
+    color: var(--color-text-main);
+    border: 1px solid #a88734;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, .4) inset;
+    border-radius: var(--radius-xl);
+}
+
+.btn-primary:active,
+.btn-primary:hover {
+    background-color: var(--color-accent-hover);
+}
+
+.btn-smart {
+    background: var(--color-accent-hover);
+    color: var(--color-text-main);
+    border: 1px solid #a88734;
+    border-radius: var(--radius-xl);
+}
+
+.btn-smart:active,
+.btn-smart:hover {
+    background: var(--color-accent);
+}
+
+/* Product Card - App Style */
+.product-card {
+    background: var(--color-surface);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.wishlist-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(4px);
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-muted);
+    z-index: 10;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+}
+
+.wishlist-btn:hover,
+.wishlist-btn.active {
+    color: #ef4444;
+    /* Red solid */
+}
+
+.product-image-container {
+    position: relative;
+    aspect-ratio: 3/4;
+    background-color: var(--color-background);
+    overflow: hidden;
+}
+
+.product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.product-details {
+    padding: var(--space-sm);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-brand {
+    font-size: 10px;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    margin-bottom: 2px;
+}
+
+.product-name {
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 4px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.product-price {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--color-error);
+    margin-bottom: 2px;
+}
+
+.product-price::before {
+    content: "$";
+    font-size: 12px;
+    vertical-align: super;
+}
+
+.product-sizes {
+    font-size: 12px;
+    color: var(--color-text-main);
+    margin-bottom: 8px;
+}
+
+.add-btn-small {
+    margin-top: auto;
+    border: 1px solid var(--color-border);
+    padding: 8px;
+    border-radius: var(--radius-xl);
+    text-align: center;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-text-main);
+    background: var(--color-accent);
+    cursor: pointer;
+}
+
+.add-btn-small:hover {
+    background: var(--color-accent-hover);
+}
+
+/* Banners */
+.promo-banner {
+    background: linear-gradient(135deg, var(--color-secondary), var(--color-primary));
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    color: white;
+    margin: var(--space-md) 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    overflow: hidden;
+    position: relative;
+}
+
+.promo-content {
+    position: relative;
+    z-index: 2;
+}
+
+.promo-banner h2 {
+    font-size: var(--font-size-xl);
+    margin-bottom: 4px;
+}
+
+.promo-banner p {
+    color: #ccc;
+    font-size: var(--font-size-sm);
+}
+
+/* Footer adjustments for app look */
+footer {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    footer {
+        display: block;
+        background-color: var(--color-surface);
+        padding: var(--space-xl) 0;
+        margin-top: var(--space-xxl);
+        border-top: 1px solid var(--color-border);
+        text-align: center;
+        color: var(--color-text-muted);
+        font-size: var(--font-size-sm);
+    }
+}
+
+/* Premium Toast Notification */
+.amazon-toast {
+    position: fixed;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: #232f3e;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 24px;
+    font-size: 14px;
+    font-weight: 500;
+    z-index: 2000;
+    transition: transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28), opacity 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+.amazon-toast.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+}
+
+/* Skeleton Loader */
+.skeleton {
+    background-color: #f0f2f2;
+    background-image: linear-gradient(90deg, #f0f2f2 0%, #e0e2e2 50%, #f0f2f2 100%);
+    background-size: 200% 100%;
+    animation: skeleton-pulse 1.5s infinite;
+    border-radius: 4px;
+}
+
+@keyframes skeleton-pulse {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* Premium Hover Effects */
+.product-card {
+    transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.2s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+/* Category Ribbon (Amazon Horizontal Scroll) */
+.category-ribbon {
+    display: flex;
+    overflow-x: auto;
+    gap: var(--space-lg);
+    padding: var(--space-md);
+    background: #f7f8fa;
+    scrollbar-width: none;
+    border-bottom: 1px solid var(--color-border);
+    -webkit-overflow-scrolling: touch;
+}
+
+.category-ribbon::-webkit-scrollbar {
+    display: none;
+}
+
+.category-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-xs);
+    min-width: 64px;
+    text-align: center;
+    text-decoration: none;
+    color: var(--color-text-main);
+    transition: var(--transition);
+}
+
+.category-icon {
+    width: 48px;
+    height: 48px;
+    background: var(--color-surface);
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--color-border);
+}
+
+.category-label {
+    font-size: 11px;
+    font-weight: 600;
+}
+
+/* Product Card (Amazon Style) */
+.product-card {
+    background: var(--color-surface);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    transition: var(--transition);
+    border: 1px solid transparent;
+}
+
+.product-card:hover {
+    border-color: #ddd;
+    box-shadow: var(--shadow-md);
+}
+
+.product-image-container {
+    padding-top: 133%;
+    /* 3:4 aspect ratio */
+    position: relative;
+    background: #f8f8f8;
+}
+
+.product-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.product-details {
+    padding: var(--space-md);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.product-name {
+    font-size: var(--font-size-sm);
+    line-height: 1.4;
+    font-weight: 500;
+    color: var(--color-text-main);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.rating-container {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin: 2px 0;
+}
+
+.stars-svg {
+    display: flex;
+    color: #ffa41c;
+    /* Amazon Star Color */
+}
+
+.rating-count {
+    font-size: 12px;
+    color: var(--color-text-info);
+    font-weight: 500;
+}
+
+.bought-count {
+    font-size: 12px;
+    color: var(--color-text-muted);
+}
+
+/* Amazon Price Formatting */
+.price-container {
+    display: flex;
+    align-items: flex-start;
+    margin-top: 4px;
+}
+
+.price-symbol {
+    font-size: 12px;
+    margin-top: 2px;
+    font-weight: 600;
+}
+
+.price-whole {
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.price-decimal {
+    font-size: 12px;
+    margin-top: 2px;
+    font-weight: 600;
+}
+
+.original-price {
+    font-size: 12px;
+    color: var(--color-text-muted);
+    text-decoration: line-through;
+    margin-left: 4px;
+    align-self: center;
+}
+
+.discount-badge {
+    background: var(--color-discount);
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 2px;
+    margin-left: 8px;
+    align-self: center;
+}
+
+.delivery-badge {
+    font-size: 12px;
+    color: var(--color-text-main);
+    margin-top: 4px;
+}
+
+.free-delivery {
+    font-weight: 700;
+}
+
+/* Bottom Nav Refinement */
+.bottom-nav {
+    display: flex;
+    justify-content: space-around;
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    padding: 8px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--color-text-main);
+    text-decoration: none;
+    font-size: 10px;
+    font-weight: 600;
+    gap: 4px;
+}
+
+.nav-item.active {
+    color: var(--color-link);
+}
+
+.nav-item svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* Infinite Scroll & Mock API Utilities */
+.skeleton-loader {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 24px;
+    background: #fdfdfd;
+    border: 1px dashed #ddd;
+    border-radius: var(--radius-md);
+    color: var(--color-text-muted);
+    font-size: 14px;
+    font-weight: 500;
+    margin: 16px 0;
+    animation: pulse-loading 1.5s infinite;
+}
+
+@keyframes pulse-loading {
+    0% {
+        opacity: 0.6;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.6;
+    }
+}
+
+.perfect-fit-badge {
+    background: #e7f3f5;
+    color: #007185;
+    border: 1px solid #007185;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    display: inline-block;
+}

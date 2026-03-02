@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elite Profile | Mirrorverse</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body style="background: white;">
+    <header id="main-header"></header>
+
+    <div class="category-ribbon">
+        <a href="shop.html?gender=Women">Women's Fashion</a>
+        <a href="shop.html?gender=Men">Men's Fashion</a>
+        <a href="smart-fit.html">AI Smart Fit</a>
+    </div>
+
+    <main class="container">
+        <h1 style="margin-bottom: 2rem;">Your Account</h1>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+            <!-- Order History -->
+            <div style="border: 1px solid #ddd; padding: 2rem; border-radius: 8px;">
+                <div style="display: flex; gap: 20px; align-items: center;">
+                    <i class="fas fa-box" style="font-size: 2.5rem; color: #aaa;"></i>
+                    <div>
+                        <h2 style="font-size: 1.2rem;">Your Orders</h2>
+                        <p style="color: #666; font-size: 0.9rem;">Track, return, or buy things again</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Smart Fit Profile -->
+            <div style="border: 1px solid #ddd; padding: 2rem; border-radius: 8px;">
+                <div style="display: flex; gap: 20px; align-items: center;">
+                    <i class="fas fa-magic" style="font-size: 2.5rem; color: var(--amazon-accent);"></i>
+                    <div>
+                        <h2 style="font-size: 1.2rem;">Elite AI Profile</h2>
+                        <p id="profile-size-status" style="color: #666; font-size: 0.9rem;">No body scan data found.</p>
+                        <a href="smart-fit.html"
+                            style="color: var(--amazon-link); text-decoration: none; font-size: 0.9rem; font-weight: 700; margin-top: 10px; display: block;">Update
+                            AI Measurements ></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Prime Clothing Preferences -->
+            <div style="border: 1px solid #ddd; padding: 2rem; border-radius: 8px;">
+                <div style="display: flex; gap: 20px; align-items: center;">
+                    <i class="fas fa-tshirt" style="font-size: 2.5rem; color: #aaa;"></i>
+                    <div>
+                        <h2 style="font-size: 1.2rem;">Elite Wardrobe</h2>
+                        <p style="color: #666; font-size: 0.9rem;">Manage your fashion preferences</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer id="main-footer"></footer>
+
+    <script type="module">
+        import { state } from './js/state.js';
+        document.addEventListener('DOMContentLoaded', () => {
+            const sizeBox = document.getElementById('profile-size-status');
+            if (state.size) {
+                sizeBox.innerHTML = `Your Perfect Size: <strong>${state.size}</strong><br><span style="color: #007600;">AI Optimized</span>`;
+            }
+        });
+    </script>
+    <script type="module" src="js/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elite Selection | Mirrorverse</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body style="background: white;">
+    <header id="main-header"></header>
+
+    <div class="category-ribbon">
+        <a href="shop.html?gender=Women">Women</a>
+        <a href="shop.html?gender=Men">Men</a>
+        <a href="smart-fit.html">Smart Fit</a>
+        <a href="shop.html?category=new">New Arrivals</a>
+    </div>
+
+    <main class="container">
+        <div id="product-detail-container" style="display: flex; gap: 4rem; padding: 2rem 0;">
+            <!-- Main visual -->
+            <div style="flex: 1;">
+                <img id="pd-img" src=""
+                    style="width: 100%; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+            </div>
+
+            <!-- Details -->
+            <div style="flex: 1; display: flex; flex-direction: column; gap: 1.5rem;">
+                <h1 id="pd-name" style="font-size: 2.5rem; letter-spacing: -1px;">--</h1>
+                <div id="pd-rating" class="rating">--</div>
+                <div id="pd-price" style="font-size: 2rem; border-top: 1px solid #eee; padding-top: 1rem;">--</div>
+
+                <div style="margin: 1rem 0;">
+                    <h4>Select Size</h4>
+                    <div id="pd-sizes" style="display: flex; gap: 10px; margin-top: 5px;">
+                        <!-- Sizes -->
+                    </div>
+                </div>
+
+                <div id="pd-description" style="color: #666; font-size: 1.1rem;">--</div>
+
+                <div class="purchase-box" style="margin-top: 2rem;">
+                    <button id="add-to-cart-big" class="btn btn-primary"
+                        style="margin-bottom: 10px; padding: 1.5rem; font-size: 1.2rem;">Add to Cart</button>
+                    <button class="btn btn-secondary" style="padding: 1.5rem; font-size: 1.2rem;">Buy Now</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer id="main-footer"></footer>
+
+    <script type="module">
+        import { api } from './js/api.js';
+        import { state } from './js/state.js';
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const id = urlParams.get('id');
+
+        async function loadDetail() {
+            if (!id) return;
+            const p = await api.getProduct(id);
+            document.getElementById('pd-name').innerText = p.name;
+            document.getElementById('pd-img').src = p.image;
+            document.getElementById('pd-price').innerText = `$${p.price.toFixed(2)}`;
+            document.getElementById('pd-description').innerText = p.description;
+            document.getElementById('pd-rating').innerHTML = `★`.repeat(Math.floor(p.rating)) + ` ${p.reviews} views`;
+
+            const sizesDiv = document.getElementById('pd-sizes');
+            const userSize = state.size;
+
+            sizesDiv.innerHTML = p.availableSizes.map(s => `
+                <button class="btn btn-outline" style="width:auto; padding: 10px 20px; border: 1px solid ${s === userSize ? 'var(--amazon-accent)' : '#eee'}; background: ${s === userSize ? '#FFF3E0' : 'white'};">
+                    ${s} ${s === userSize ? '<i class="fas fa-check-circle"></i>' : ''}
+                </button>
+            `).join('');
+
+            document.getElementById('add-to-cart-big').onclick = () => {
+                state.addToCart(p);
+                alert(`Added to elite cart: ${p.name}`);
+            };
+        }
+
+        document.addEventListener('DOMContentLoaded', loadDetail);
+    </script>
+    <script type="module" src="js/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart | Mirrorverse</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <header id="main-header"></header>
+
+    <main class="container">
+        <div class="cart-page">
+            <div id="cart-items" class="cart-items">
+                <!-- Cart items load here -->
+                <div class="empty-cart">
+                    <i class="fas fa-shopping-bag"></i>
+                    <h2>Your bag is empty</h2>
+                    <p>Scan and shop the elite collection.</p>
+                </div>
+            </div>
+
+            <div class="cart-summary">
+                <h3>Order Summary</h3>
+                <div class="summary-row">
+                    <span>Subtotal (<span id="count-subtotal">0</span> items)</span>
+                    <span id="total-subtotal">$0.00</span>
+                </div>
+                <div class="summary-row">
+                    <span>Shipping</span>
+                    <span style="color: var(--success); font-weight: 700;">FREE</span>
+                </div>
+                <div class="summary-row total">
+                    <span>Total</span>
+                    <span id="total-subtotal-final">$0.00</span>
+                </div>
+                <button class="btn btn-primary checkout-btn">Proceed to Checkout</button>
+                <p style="margin-top: 1.5rem; font-size: 0.8rem; color: var(--text-muted); text-align: center;">
+                    <i class="fas fa-lock"></i> Secure Checkout
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <footer id="main-footer"></footer>
+
+    <script type="module" src="js/cart.js"></script>
+    <script type="module" src="js/main.js"></script>
+</body>
+
+</html>

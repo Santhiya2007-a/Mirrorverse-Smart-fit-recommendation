@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mirrorverse App | Smart Fit Recommendation</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+  <!-- App Header (Amazon Inspired) -->
+  <header class="app-header">
+    <div class="container">
+      <div class="header-top">
+        <div class="header-logo">
+          Mirrorverse
+        </div>
+        <div class="header-actions">
+          <a href="profile.html" class="icon-link">
+            <span style="font-size: 11px; font-weight: 500;">Sign in ›</span>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+          </a>
+          <a href="cart.html" class="icon-link">
+            <span class="badge-count" id="header-cart-count">0</span>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <path d="M16 10a4 4 0 0 1-8 0"></path>
+            </svg>
+            <span class="icon-label">Cart</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="search-container">
+        <input type="text" class="search-input" id="search-input-home" placeholder="Search Mirrorverse">
+        <div class="search-btn" id="search-btn-home">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Horizontal Category Ribbon -->
+  <div class="category-ribbon">
+    <a href="shop.html?cat=Blazer" class="category-item">
+      <div class="category-icon">🧥</div>
+      <span class="category-label">Blazer</span>
+    </a>
+    <a href="shop.html?cat=Pencil" class="category-item">
+      <div class="category-icon">👗</div>
+      <span class="category-label">Pencil</span>
+    </a>
+    <a href="shop.html?cat=Sheath" class="category-item">
+      <div class="category-icon">👔</div>
+      <span class="category-label">Sheath</span>
+    </a>
+    <a href="shop.html?cat=Wrap" class="category-item">
+      <div class="category-icon">🎀</div>
+      <span class="category-label">Wrap</span>
+    </a>
+    <a href="shop.html?cat=Maxi" class="category-item">
+      <div class="category-icon">💃</div>
+      <span class="category-label">Maxi</span>
+    </a>
+    <a href="shop.html?cat=Casual" class="category-item">
+      <div class="category-icon">👕</div>
+      <span class="category-label">Casual</span>
+    </a>
+    <a href="shop.html?cat=Party" class="category-item">
+      <div class="category-icon">✨</div>
+      <span class="category-label">Party</span>
+    </a>
+    <a href="shop.html?cat=Formal" class="category-item">
+      <div class="category-icon">🏢</div>
+      <span class="category-label">Formal</span>
+    </a>
+  </div>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Amazon-style Deal of the Day -->
+    <section class="container" style="margin-top: var(--space-lg);">
+      <div
+        style="background: white; padding: var(--space-lg); border-radius: var(--radius-sm); border: 1px solid var(--color-border);">
+        <h2 style="font-size: 1.125rem; font-weight: 700; margin-bottom: var(--space-lg);">Deal of the Day</h2>
+        <div style="display: flex; gap: var(--space-lg); align-items: flex-start;">
+          <div style="flex: 1;">
+            <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=500&q=80"
+              style="width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: var(--radius-sm);" alt="Deal">
+          </div>
+          <div style="flex: 1.5; display: flex; flex-direction: column; gap: 4px;">
+            <div style="display: flex; gap: 8px; align-items: center;">
+              <span
+                style="background: #cc0c39; color: white; padding: 4px 8px; font-size: 11px; font-weight: 700; border-radius: 2px;">Up
+                to 40% off</span>
+              <span style="color: #b12704; font-size: 11px; font-weight: 700;">Limited time deal</span>
+            </div>
+            <h3 style="font-size: 14px; font-weight: 500; margin-top: 4px;">Premium Women's Blazer Dresses</h3>
+            <a href="smart-fit.html" class="btn btn-smart"
+              style="margin-top: 8px; font-size: 12px; width: fit-content;">Try Smart Fit Camera</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Trending Section -->
+    <section class="container"
+      style="margin-top: var(--space-lg); background: white; padding: var(--space-lg); border: 1px solid var(--color-border);">
+      <h3 style="font-size: 1.125rem; font-weight: 700; margin-bottom: var(--space-lg);">Trending recommendations</h3>
+      <div id="featured-products-grid" class="product-grid">
+        <!-- Products injected by main.js -->
+        <div class="skeleton" style="height: 300px;"></div>
+        <div class="skeleton" style="height: 300px;"></div>
+      </div>
+      <div
+        style="margin-top: var(--space-lg); padding-top: var(--space-lg); border-top: 1px solid var(--color-border);">
+        <a href="shop.html" style="color: var(--color-link); font-size: 13px; font-weight: 500;">See all
+          recommendations</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Bottom Navigation -->
+  <nav class="bottom-nav">
+    <a href="index.html" class="nav-item active">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+      </svg>
+      <span>Home</span>
+    </a>
+    <a href="shop.html" class="nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+      </svg>
+      <span>Shop</span>
+    </a>
+    <a href="smart-fit.html" class="nav-item" style="color: var(--color-link);">
+      <div style="background: var(--color-accent); border-radius: 50%; padding: 4px; display: flex;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px;">
+          <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+          <circle cx="12" cy="13" r="4"></circle>
+        </svg>
+      </div>
+      <span>Smart Fit</span>
+    </a>
+    <a href="cart.html" class="nav-item">
+      <div style="position: relative;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+        </svg>
+        <span class="badge-count" id="bot-cart-count" style="top: -8px; right: -8px;">0</span>
+      </div>
+      <span>Cart</span>
+    </a>
+    <a href="profile.html" class="nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+        <circle cx="12" cy="7" r="4"></circle>
+      </svg>
+      <span>Profile</span>
+    </a>
+  </nav>
+
+  <script src="js/main.js"></script>
+  <script>
+    // Search handling
+    document.getElementById('search-btn-home').addEventListener('click', () => {
+      const q = document.getElementById('search-input-home').value;
+      if (q) window.location.href = `shop.html?search=${encodeURIComponent(q)}`;
+    });
+    document.getElementById('search-input-home').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        const q = e.target.value;
+        if (q) window.location.href = `shop.html?search=${encodeURIComponent(q)}`;
+      }
+    });
+  </script>
+</body>
+
+</html>

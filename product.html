@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product | Mirrorverse App</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .inner-header {
+            background-color: var(--color-primary);
+            position: sticky;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: var(--space-sm) var(--space-md);
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+
+        .header-search-mini {
+            flex: 1;
+            margin: 0 var(--space-md);
+            background: white;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            padding: 4px 8px;
+            height: 36px;
+        }
+
+        .header-search-mini input {
+            border: none;
+            width: 100%;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .prod-image-carousel {
+            width: 100%;
+            background: white;
+            position: relative;
+        }
+
+        .prod-main-img {
+            width: 100%;
+            height: auto;
+            max-height: 450px;
+            object-fit: contain;
+            display: block;
+        }
+
+        .product-meta-section {
+            padding: var(--space-md);
+            background: white;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .brand-link {
+            color: var(--color-link);
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .prod-title {
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 1.3;
+            margin: 4px 0;
+            color: #0f1111;
+        }
+
+        .rating-stars {
+            color: #ffa41c;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            margin-bottom: 8px;
+        }
+
+        .price-section {
+            padding: var(--space-md);
+            background: white;
+        }
+
+        .amazon-price {
+            color: #B12704;
+            font-size: 28px;
+            font-weight: 500;
+        }
+
+        .amazon-price::before {
+            content: "$";
+            font-size: 14px;
+            vertical-align: super;
+            margin-right: 2px;
+        }
+
+        .stock-status {
+            color: var(--color-success);
+            font-weight: 700;
+            font-size: 14px;
+            margin: 8px 0;
+        }
+
+        .checkout-box {
+            padding: var(--space-md);
+            background: #f7f7f7;
+            border-top: 1px solid var(--color-border);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .buy-btn-amazon {
+            width: 100%;
+            padding: 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            border: 1px solid #a88734;
+            cursor: pointer;
+        }
+
+        .btn-add-to-cart {
+            background: #FFD814;
+            color: #0F1111;
+        }
+
+        .btn-buy-now {
+            background: #FFA41C;
+            color: #0F1111;
+        }
+
+        .feature-item {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+            font-size: 13px;
+        }
+
+        .feature-icon {
+            width: 24px;
+            color: var(--color-text-muted);
+        }
+    </style>
+</head>
+
+<body style="background:var(--color-surface);">
+
+    <!-- App Header (Amazon Inspired) -->
+    <header class="app-header">
+        <div class="container">
+            <div class="header-top">
+                <a href="shop.html" class="flex items-center" style="color:white;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                        <polyline points="12 19 5 12 12 5"></polyline>
+                    </svg>
+                </a>
+                <div class="search-container">
+                    <input type="text" class="search-input" id="search-input-home" placeholder="Search Mirrorverse">
+                    <div class="search-btn" id="search-btn-home">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <a href="cart.html" class="icon-link">
+                        <span class="badge-count" id="header-cart-count">0</span>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main id="amazon-product-main" style="padding-bottom: 80px;">
+        <div class="prod-image-carousel" style="border-bottom: 1px solid var(--color-border);">
+            <img src="" alt="Product Image" class="prod-main-img" id="prod-main-img"
+                style="width: 100%; aspect-ratio: 3/4; object-fit: cover;">
+        </div>
+
+        <div id="product-details-container">
+            <!-- Details will be injected here -->
+            <div style="padding: 20px;">
+                <div class="skeleton" style="height: 20px; width: 60%; margin-bottom: 10px;"></div>
+                <div class="skeleton" style="height: 30px; width: 90%; margin-bottom: 10px;"></div>
+                <div class="skeleton" style="height: 20px; width: 40%; margin-bottom: 20px;"></div>
+                <div class="skeleton" style="height: 100px; width: 100%;"></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg>
+            <span>Home</span>
+        </a>
+        <a href="shop.html" class="nav-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+            <span>Shop</span>
+        </a>
+        <a href="smart-fit.html" class="nav-item">
+            <div style="background: var(--color-accent); border-radius: 50%; padding: 4px; display: flex;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    style="width: 24px; height: 24px;">
+                    <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                    <circle cx="12" cy="13" r="4"></circle>
+                </svg>
+            </div>
+            <span>Smart Fit</span>
+        </a>
+        <a href="cart.html" class="nav-item">
+            <div style="position: relative;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                </svg>
+                <span class="badge-count" id="bot-cart-count" style="top: -8px; right: -8px;">0</span>
+            </div>
+            <span>Cart</span>
+        </a>
+        <a href="profile.html" class="nav-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span>Profile</span>
+        </a>
+    </nav>
+
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = urlParams.get('id');
+            const container = document.getElementById('product-details-container');
+            const mainImg = document.getElementById('prod-main-img');
+
+            if (!productId) {
+                container.innerHTML = '<div style="padding: 40px; text-align: center;">Product not found.</div>';
+                return;
+            }
+
+            try {
+                const response = await fetch('data/products.json');
+                const products = await response.json();
+                const product = products.find(p => p.id === productId);
+
+                if (!product) {
+                    container.innerHTML = '<div style="padding: 40px; text-align: center;">Product not found.</div>';
+                    return;
+                }
+
+                mainImg.src = product.image;
+
+                // Stars HTML
+                const fullStars = Math.floor(product.rating);
+                const hasHalf = (product.rating % 1) >= 0.5;
+                let starsHTML = '';
+                for (let i = 1; i <= 5; i++) {
+                    if (i <= fullStars) {
+                        starsHTML += `<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="color: #ffa41c;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path></svg>`;
+                    } else if (i === fullStars + 1 && hasHalf) {
+                        starsHTML += `<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="color: #ffa41c;"><path d="M22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21 12 17.27 18.18 21l-1.63-7.03L22 9.24zM12 15.4V6.1l1.71 4.04 4.38.38-3.32 2.88 1 4.28L12 15.4z"></path></svg>`;
+                    } else {
+                        starsHTML += `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: #ffa41c;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path></svg>`;
+                    }
+                }
+
+                container.innerHTML = `
+                <div class="product-meta-section">
+                    <a href="shop.html?cat=${product.category}" class="brand-link">Visit the ${product.category} Dress Store</a>
+                    <h1 class="prod-title">${product.name}</h1>
+                    <div class="rating-container">
+                        <div class="stars-svg">${starsHTML}</div>
+                        <span class="rating-count" style="font-size: 14px;">${product.ratingCount.toLocaleString()} ratings</span>
+                    </div>
+                </div>
+
+                <div class="price-section" style="border-bottom: 1px solid var(--color-border);">
+                    <div style="display: flex; align-items: baseline; gap: 4px;">
+                        <span style="font-size: 14px; font-weight: 500; color: var(--color-error);">-25%</span>
+                        <div class="price-container" style="color: var(--color-error); font-size: 28px;">
+                            <span class="price-symbol" style="font-size: 16px;">$</span>
+                            <span class="price-whole">${Math.floor(product.price)}</span>
+                            <span class="price-decimal" style="font-size: 16px;">${(product.price % 1).toFixed(2).split('.')[1]}</span>
+                        </div>
+                    </div>
+                    <div style="font-size: 13px; color: var(--color-text-muted); margin-top: 4px;">
+                        Typical price: <span style="text-decoration: line-through;">$${product.originalPrice}</span>
+                    </div>
+                    <div class="delivery-badge" style="margin-top: 12px; font-size: 14px;">
+                        ${product.freeDelivery ? '<span class="free-delivery">FREE delivery</span>' : ''} Tomorrow, <b>March 1</b>.
+                    </div>
+                    <div style="color: var(--color-success); font-weight: 700; font-size: 16px; margin-top: 12px;">In Stock</div>
+                </div>
+
+                <div class="checkout-box" style="padding: 16px; background: white;">
+                    <div style="margin-bottom: 16px;">
+                        <label style="font-size: 14px; font-weight: 700;">Size:</label>
+                        <div style="display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap;">
+                            ${product.sizes.map(s => `
+                                <button class="size-option" onclick="selectSize(this)" style="padding: 8px 16px; border: 1px solid var(--color-border); border-radius: 4px; background: white; font-size: 14px; cursor: pointer;">${s}</button>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <div style="background: #e7f3f5; padding: 12px; border-radius: 8px; margin: 20px 0; display: flex; align-items: center; gap: 12px; border: 1px solid #d0e7eb;">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#232f3e" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+                        <div style="flex:1;">
+                            <div style="font-weight: 700; font-size: 13px;">Find your fit with Mirrorverse AI</div>
+                            <div style="font-size: 12px; color: #565959;">Scan your body for a precise size recommendation.</div>
+                        </div>
+                        <a href="smart-fit.html?productId=${product.id}" class="btn" style="background:white; border: 1px solid var(--color-border); font-size: 12px; padding: 6px 12px; border-radius: 16px; white-space: nowrap;">Start Scan</a>
+                    </div>
+
+                    <button class="buy-btn-amazon btn-add-to-cart" onclick="addToCart(event, '${product.id}')" style="background: #FFD814; border-color: #FCD200; border-radius: 20px; width: 100%; padding: 12px; font-weight: 500; margin-bottom: 10px; border: 1px solid;">Add to Cart</button>
+                    <button class="buy-btn-amazon btn-buy-now" style="background: #FFA41C; border-color: #FF8F00; border-radius: 20px; width: 100%; padding: 12px; font-weight: 500; border: 1px solid;">Buy Now</button>
+                </div>
+
+                <div style="padding: 16px; border-top: 8px solid #f0f2f2;">
+                    <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 12px;">Product Description</h3>
+                    <p style="font-size: 14px; line-height: 1.5; color: #0f1111;">
+                        Experience elegance and comfort with this premium ${product.category} dress from Mirrorverse. 
+                        Designed for all body types with a focus on premium fabric and sustainable tailoring.
+                    </p>
+                    <ul style="margin-top: 10px; font-size: 14px; color: #0f1111; list-style: disc; padding-left: 20px;">
+                        <li>Fabric: Premium Cotton Blend / Silk Panel</li>
+                        <li>Fit: Body-contoured silhouette</li>
+                        <li>Care: Machine washable / Hand wash recommended</li>
+                        <li>Occasion: Versatile for work, party, and casual outings</li>
+                    </ul>
+                </div>
+            `;
+
+            } catch (error) {
+                console.error(error);
+                container.innerHTML = '<div style="padding: 40px; text-align: center;">Error loading product.</div>';
+            }
+        });
+
+        window.selectSize = function (btn) {
+            document.querySelectorAll('.size-option').forEach(b => b.style.borderColor = 'var(--color-border)');
+            document.querySelectorAll('.size-option').forEach(b => b.style.backgroundColor = 'white');
+            btn.style.borderColor = '#e77600';
+            btn.style.backgroundColor = '#fffbf6';
+        };
+    </script>
+</body>
+
+</html>
+</body>
+
+</html>

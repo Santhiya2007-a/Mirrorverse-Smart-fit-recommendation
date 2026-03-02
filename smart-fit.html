@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Fit Camera | Mirrorverse App</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+
+    <!-- MediaPipe dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose/pose.js" crossorigin="anonymous"></script>
+
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+        }
+
+        /* Dark mode for camera page */
+
+        .camera-header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: var(--space-md);
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), transparent);
+        }
+
+        .icon-btn-circle {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(4px);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+        }
+
+        .viewfinder-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #live-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scaleX(-1);
+            /* Mirror camera */
+        }
+
+        #output-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scaleX(-1);
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        /* Target Guide Overlay */
+        .target-guide {
+            position: absolute;
+            border: 2px dashed rgba(255, 255, 255, 0.5);
+            border-radius: var(--radius-lg);
+            width: 80%;
+            height: 80%;
+            z-index: 5;
+            pointer-events: none;
+        }
+
+        .guide-text {
+            position: absolute;
+            top: 15%;
+            width: 100%;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 500;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+            z-index: 5;
+        }
+
+        .camera-controls {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: var(--space-xl) var(--space-md) var(--bottom-nav-height);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+        }
+
+        .scan-btn {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            border: 4px solid #ffffff;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: var(--transition);
+            margin-bottom: var(--space-md);
+        }
+
+        .scan-btn:active {
+            transform: scale(0.9);
+            background: #ffffff;
+        }
+
+        /* Results Overlay */
+        .results-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--color-surface);
+            color: var(--color-text-main);
+            z-index: 200;
+            transform: translateY(100%);
+            transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            overflow-y: auto;
+            padding-bottom: 80px;
+        }
+
+        .results-overlay.active {
+            transform: translateY(0);
+        }
+
+        .result-header {
+            padding: var(--space-xl) var(--space-md) var(--space-md);
+            background: linear-gradient(135deg, var(--color-secondary), var(--color-accent));
+            text-align: center;
+            border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+        }
+
+        .match-scroll {
+            display: flex;
+            overflow-x: auto;
+            gap: var(--space-md);
+            padding: var(--space-sm) var(--space-md);
+            scrollbar-width: none;
+        }
+
+        .match-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .match-card {
+            min-width: 140px;
+            background: var(--color-background);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .match-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        /* Loading state */
+        #loading-indicator {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.8);
+            padding: 16px 24px;
+            border-radius: 20px;
+            display: none;
+            align-items: center;
+            gap: 12px;
+            z-index: 150;
+        }
+
+        .spinner {
+            width: 24px;
+            height: 24px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--color-primary);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Camera View -->
+    <div class="viewfinder-container" id="camera-view">
+        <header class="camera-header" style="background: var(--color-primary); position: relative;">
+            <a href="index.html" class="icon-btn-circle" style="background: rgba(255,255,255,0.1);">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+            </a>
+            <span style="color: white; font-weight: 700; font-size: 14px;">AI Fit Scanner</span>
+            <div style="width: 40px;"></div> <!-- balance -->
+        </header>
+
+        <video id="live-video" autoplay playsinline muted></video>
+        <canvas id="output-canvas"></canvas>
+
+        <div class="target-guide"></div>
+        <div class="guide-text" id="guide-text">Position your full body in the frame.<br>Stand straight.</div>
+
+        <div class="camera-controls">
+            <button class="scan-btn" id="scan-btn" onclick="captureAndScan()">
+                <div style="width: 52px; height: 52px; background: white; border-radius: 50%;"></div>
+            </button>
+            <div style="font-size: 12px; opacity: 0.8;">Tap to Scan Body</div>
+        </div>
+
+        <div id="loading-indicator">
+            <div class="spinner"></div><span style="font-weight: 500;">Analyzing...</span>
+        </div>
+    </div>
+
+    <!-- Results Overlay (Bottom Sheet that slides up) -->
+    <div class="results-overlay" id="results-overlay">
+        <div class="result-header">
+            <div class="flex justify-between items-center mb-2">
+                <button onclick="closeResults()" class="icon-btn-circle"
+                    style="color: var(--color-text-main); background: rgba(255,255,255,0.5);"><svg width="24"
+                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg></button>
+                <div style="font-size: 12px; font-weight: 600; text-transform: uppercase;">Scan Complete</div>
+                <div style="width: 40px;"></div>
+            </div>
+            <h2 style="font-size: 16px; margin-top: 12px;">Your Recommended Size</h2>
+            <div id="recommended-size"
+                style="font-size: 4rem; font-weight: 700; color: var(--color-primary); line-height: 1;">M</div>
+            <div id="confidence-score"
+                style="font-size: 13px; font-weight: 600; color: var(--color-success); margin-top: 4px;">Confidence: 92%
+            </div>
+
+            <div class="flex justify-center gap-md"
+                style="margin-top: 16px; font-size: 13px; background: rgba(255,255,255,0.5); padding: 8px; border-radius: 12px;">
+                <div><strong>Che:</strong> <span id="est-chest">90</span>cm</div>
+                <div><strong>Wst:</strong> <span id="est-waist">72</span>cm</div>
+                <div><strong>Hip:</strong> <span id="est-hip">98</span>cm</div>
+            </div>
+        </div>
+
+        <div id="ai-stylist-card"
+            style="margin: var(--space-md); padding: var(--space-md); background: #f0f7ff; border: 1px solid #cce4ff; border-radius: var(--radius-lg); display: none;">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                <span style="font-size: 20px;">✨</span>
+                <h4 style="font-size: 14px; font-weight: 700; color: #0056b3; margin: 0;">AI Stylist Advice</h4>
+            </div>
+            <div id="ai-stylist-loading" style="display: flex; align-items: center; gap: 8px;">
+                <div class="spinner" style="width: 16px; height: 16px; border-top-color: #0056b3;"></div>
+                <span style="font-size: 13px; color: #666;">Consulting with Gemini...</span>
+            </div>
+            <p id="ai-stylist-text" style="font-size: 14px; line-height: 1.5; color: #333; margin: 0; display: none;">
+            </p>
+        </div>
+
+        <div style="padding: var(--space-md) 0;">
+            <h3 style="padding: 0 var(--space-md); font-size: 16px; margin-bottom: 12px;">Perfect Matches for You (<span
+                    id="match-count">0</span>)</h3>
+            <div class="match-scroll" id="match-container">
+                <p style="padding: 0 var(--space-md); font-size: 14px;">Loading matching dresses...</p>
+            </div>
+        </div>
+
+        <div style="padding: 0 var(--space-md); margin-top: 12px;">
+            <button class="btn btn-outline" style="width: 100%; border-radius: 20px; font-size: 14px; padding: 12px;"
+                onclick="closeResults()">Retake Scan</button>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/smart-fit.js"></script>
+</body>
+
+</html>

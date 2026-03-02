@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mirrorverse | Smart Fit Recommendation</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <header id="main-header"></header>
+
+    <div class="category-ribbon">
+        <a href="shop.html?gender=Women">Women's Fashion</a>
+        <a href="shop.html?gender=Men">Men's Fashion</a>
+        <a href="smart-fit.html">AI Smart Fit</a>
+        <a href="shop.html?category=new">New Arrivals</a>
+        <a href="shop.html?category=best">Best Sellers</a>
+    </div>
+
+    <main id="main-content">
+        <!-- Banner Carousel (Mock) -->
+        <section class="hero-banner" style="padding: 6rem 0; text-align: center;">
+            <div class="container">
+                <h1 style="font-size: 3.5rem; margin-bottom: 1rem; color: var(--primary); letter-spacing: -2px;">Elevate
+                    Your Fit</h1>
+                <p style="font-size: 1.25rem; color: var(--text-muted); max-width: 600px; margin: 0 auto 2rem;">Discover
+                    the future of personal fashion with our AI-driven sizing precision.</p>
+                <div style="margin-top: 2.5rem;">
+                    <a href="smart-fit.html" class="btn btn-primary"
+                        style="width: auto; padding: 1.25rem 3.5rem; font-size: 1.1rem; border-radius: 50px;">START AI
+                        SCAN</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Categories Section -->
+        <section class="container">
+            <h2 style="margin-bottom: 1.5rem;">Shop by Department</h2>
+            <div class="product-grid">
+                <a href="shop.html?gender=Women" class="product-card">
+                    <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800" class="product-img">
+                    <h3>Women's Clothing</h3>
+                </a>
+                <a href="shop.html?gender=Men" class="product-card">
+                    <img src="https://images.unsplash.com/photo-1544022613-e87ce7526ed1?w=800" class="product-img">
+                    <h3>Men's Clothing</h3>
+                </a>
+            </div>
+        </section>
+
+        <!-- Featured Section -->
+        <section class="container">
+            <h2 style="margin-bottom: 1.5rem;">Featured Collections</h2>
+            <div id="featured-products" class="product-grid">
+                <!-- Skeleton UI -->
+                <div class="product-card skeleton">
+                    <div class="skeleton-img"></div>
+                </div>
+                <div class="product-card skeleton">
+                    <div class="skeleton-img"></div>
+                </div>
+                <div class="product-card skeleton">
+                    <div class="skeleton-img"></div>
+                </div>
+                <div class="product-card skeleton">
+                    <div class="skeleton-img"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="main-footer"></footer>
+
+    <div class="bottom-nav">
+        <a href="index.html"><i class="fas fa-home"></i></a>
+        <a href="smart-fit.html"><i class="fas fa-camera"></i></a>
+        <a href="profile.html"><i class="fas fa-user"></i></a>
+        <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
+    </div>
+
+    <script type="module" src="js/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,156 @@
+/* frontend/src/styles/pages/Home.css */
+.home-unsplash {
+    background: var(--white);
+}
+
+.hero-full {
+    height: 90vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+}
+
+.hero-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hero-overlay-minimal {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.6) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    text-align: center;
+}
+
+.hero-title-main {
+    font-size: 8rem;
+    font-weight: 800;
+    letter-spacing: -5px;
+    margin-bottom: 1rem;
+    text-transform: lowercase;
+}
+
+.hero-subtitle {
+    font-size: 1.5rem;
+    max-width: 600px;
+    margin: 0 auto 3rem;
+    font-weight: 300;
+    line-height: 1.4;
+}
+
+.hero-cta-group {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.btn-white {
+    background: #fff;
+    color: #000;
+}
+
+.btn-outline-white {
+    border: 1px solid #fff;
+    color: #fff;
+}
+
+.btn-xl {
+    padding: 1.5rem 4rem !important;
+    font-size: 1.1rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 2px;
+}
+
+.home-galleries {
+    padding: 8rem 0;
+}
+
+.personalized-picks {
+    padding: 8rem 0;
+    background: #fafafa;
+    border-top: 1px solid #eee;
+}
+
+.view-all-cta {
+    text-align: center;
+    margin-top: 5rem;
+}
+
+.view-all-cta .btn {
+    padding: 1.2rem 4rem;
+}
+
+.gallery-intro {
+    text-align: center;
+    margin-bottom: 5rem;
+}
+
+.gallery-intro h2 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    letter-spacing: -1px;
+}
+
+.gallery-intro p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.collection-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+}
+
+.collection-item {
+    text-decoration: none;
+    color: var(--text);
+}
+
+.collection-img {
+    aspect-ratio: 4/5;
+    overflow: hidden;
+    background: #f1f1f1;
+    margin-bottom: 1.5rem;
+}
+
+.collection-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 1s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.collection-item:hover img {
+    transform: scale(1.05);
+}
+
+.collection-item h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+@media (max-width: 768px) {
+    .collection-strip {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-title-main {
+        font-size: 4rem;
+        letter-spacing: -2px;
+    }
+}

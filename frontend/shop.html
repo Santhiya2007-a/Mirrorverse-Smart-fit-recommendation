@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personalized Shop | Mirrorverse</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <header id="main-header"></header>
+
+    <div class="category-ribbon">
+        <a href="shop.html?gender=Women">Women</a>
+        <a href="shop.html?gender=Men">Men</a>
+        <a href="smart-fit.html">Smart Fit</a>
+        <a href="shop.html?category=new">New Arrivals</a>
+    </div>
+
+    <main class="container">
+        <!-- Personalized Banner (Hidden by default) -->
+        <div id="personalized-banner"
+            style="display: none; background: #FF990022; padding: 1.5rem; border: 1px solid var(--amazon-accent); border-radius: 8px; margin-bottom: 2rem;">
+            <h2><i class="fas fa-magic"></i> YOUR PERSONALIZED WARDROBE</h2>
+            <p>Showing elite designs specifically for your <strong>Size <span id="user-size">--</span></strong>
+                silhouette.</p>
+        </div>
+
+        <div style="display: flex; gap: 2rem;">
+            <!-- Filters (Sidebar simplified for desktop) -->
+            <aside style="flex: 0 0 250px;">
+                <h3>Filters</h3>
+                <div style="margin-top: 1rem;">
+                    <h4>Gender</h4>
+                    <ul style="list-style: none; margin: 0.5rem 0; font-size: 0.9rem;">
+                        <li><a href="shop.html?gender=Women" style="color:var(--text); text-decoration:none;">Women's
+                                Clothing</a></li>
+                        <li><a href="shop.html?gender=Men" style="color:var(--text); text-decoration:none;">Men's
+                                Clothing</a></li>
+                    </ul>
+
+                    <h4 style="margin-top:1.5rem;">Luxury Categories</h4>
+                    <ul style="list-style: none; margin: 0.5rem 0; font-size: 0.9rem;">
+                        <li><a href="shop.html?category=Blazer"
+                                style="color:var(--text); text-decoration:none;">Blazer</a></li>
+                        <li><a href="shop.html?category=Maxi" style="color:var(--text); text-decoration:none;">Maxi</a>
+                        </li>
+                        <li><a href="shop.html?category=Sheath"
+                                style="color:var(--text); text-decoration:none;">Sheath</a></li>
+                        <li><a href="shop.html?category=Linen"
+                                style="color:var(--text); text-decoration:none;">Linen</a></li>
+                    </ul>
+                </div>
+            </aside>
+
+            <!-- Results -->
+            <div style="flex: 1;">
+                <h1 id="shop-title" style="margin-bottom: 1.5rem;">Luxury Collection</h1>
+                <div id="product-grid" class="product-grid">
+                    <!-- Products loaded here -->
+                    <div class="skeleton-card">
+                        <div class="skeleton-img"></div>
+                    </div>
+                    <div class="skeleton-card">
+                        <div class="skeleton-img"></div>
+                    </div>
+                    <div class="skeleton-card">
+                        <div class="skeleton-img"></div>
+                    </div>
+                </div>
+                <div id="infinite-scroll-sentinel" style="height: 50px;"></div>
+                <div id="no-results" style="display: none; text-align: center; padding: 3rem;">
+                    <i class="fas fa-search" style="font-size: 3rem; color: #ddd;"></i>
+                    <p style="margin-top: 1rem;">No matching garments found. Try adjusting your filters.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer id="main-footer"></footer>
+
+    <script type="module" src="js/infinite-scroll.js"></script>
+    <script type="module" src="js/main.js"></script>
+</body>
+
+</html>

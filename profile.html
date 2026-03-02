@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Account | Mirrorverse</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .profile-header {
+            background-color: var(--color-primary);
+            padding: var(--space-md);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .user-greeting {
+            font-size: 20px;
+            font-weight: 500;
+        }
+
+        .account-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            padding: var(--space-md);
+        }
+
+        .account-card {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+            text-decoration: none;
+            color: #0f1111;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .account-card span {
+            font-size: 14px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+
+<body style="background: #eaeded; padding-bottom: 100px;">
+    <header class="profile-header">
+        <div class="user-greeting">Hello, Guest</div>
+        <div
+            style="width: 40px; height: 40px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+        </div>
+    </header>
+
+    <div class="account-grid">
+        <a href="#" class="account-card">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#007185" stroke-width="2">
+                <rect x="1" y="3" width="15" height="13"></rect>
+                <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                <circle cx="18.5" cy="18.5" r="2.5"></circle>
+            </svg>
+            <span>Your Orders</span>
+        </a>
+        <a href="cart.html" class="account-card">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#007185" stroke-width="2">
+                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+            </svg>
+            <span>Buy Again</span>
+        </a>
+        <a href="login.html" class="account-card">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#007185" stroke-width="2">
+                <path
+                    d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.778-7.778zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3y-2.5z">
+                </path>
+            </svg>
+            <span>Login & Security</span>
+        </a>
+        <a href="smart-fit.html" class="account-card">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#007185" stroke-width="2">
+                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                <circle cx="12" cy="13" r="4"></circle>
+            </svg>
+            <span>AI Measurement</span>
+        </a>
+    </div>
+
+    <div
+        style="background: white; margin: 0 var(--space-md); border: 1px solid #ddd; border-radius: 8px; padding: var(--space-md);">
+        <h3 style="font-size: 16px; margin-bottom: 12px; border-bottom: 1px solid #eee; padding-bottom: 8px;">Account
+            Settings</h3>
+        <ul style="list-style: none; padding: 0; font-size: 14px; color: #007185;">
+            <li style="padding: 12px 0; border-bottom: 1px solid #eee;">Manage Your Profiles</li>
+            <li style="padding: 12px 0; border-bottom: 1px solid #eee;">Login with Amazon</li>
+            <li style="padding: 12px 0;">Customer Service</li>
+        </ul>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg>
+            <span>Home</span>
+        </a>
+        <a href="shop.html" class="nav-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+            <span>Shop</span>
+        </a>
+        <a href="smart-fit.html" class="nav-item">
+            <div style="background: var(--color-accent); border-radius: 50%; padding: 4px; display: flex;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    style="width: 24px; height: 24px;">
+                    <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                    <circle cx="12" cy="13" r="4"></circle>
+                </svg>
+            </div>
+            <span>Smart Fit</span>
+        </a>
+        <a href="cart.html" class="nav-item">
+            <div style="position: relative;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                </svg>
+                <span class="badge-count" id="bot-cart-count" style="top: -8px; right: -8px;">0</span>
+            </div>
+            <span>Cart</span>
+        </a>
+        <a href="profile.html" class="nav-item active">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span>Profile</span>
+        </a>
+    </nav>
+
+    <script src="js/main.js"></script>
+    <script>
+        function updateBadges() {
+            let cart = JSON.parse(localStorage.getItem('mirrorverse_cart')) || [];
+            document.getElementById('bot-cart-count').innerText = cart.length;
+        }
+        document.addEventListener('DOMContentLoaded', updateBadges);
+    </script>
+</body>
+
+</html>

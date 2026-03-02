@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Size Guide | Mirrorverse App</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .inner-header {
+            background-color: var(--color-primary);
+            padding: var(--space-sm) 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            color: white;
+        }
+
+        .size-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: var(--space-md);
+            background: var(--color-surface);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            font-size: 13px;
+        }
+
+        .size-table th,
+        .size-table td {
+            padding: 12px 8px;
+            text-align: left;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .size-table th {
+            background-color: var(--color-background);
+            font-weight: 600;
+            color: var(--color-text-muted);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- App Header -->
+    <header class="inner-header">
+        <div class="container flex items-center">
+            <button onclick="window.history.back()"
+                style="display: flex; align-items: center; color: white; background: none; border: none; cursor: pointer; margin-right: 16px;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+            </button>
+            <h1 style="font-size: 18px; font-weight:700;">Size Guide</h1>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container" style="padding-top: var(--space-md); padding-bottom: 120px;">
+
+        <div
+            style="background: var(--color-surface); padding: var(--space-md); border-radius: var(--radius-md); box-shadow: var(--shadow-sm);">
+            <h2 style="font-size: 16px; margin-bottom: 4px;">Women's Standard Measurements</h2>
+            <p style="font-size: 12px; color: var(--color-text-muted);">Accurate, realistic measurements designed for
+                standard fashion fits.</p>
+
+            <div style="overflow-x: auto;">
+                <table class="size-table">
+                    <thead>
+                        <tr>
+                            <th>Size</th>
+                            <th>Chest</th>
+                            <th>Waist</th>
+                            <th>Hip</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>S</strong></td>
+                            <td>86-90 cm</td>
+                            <td>66-70 cm</td>
+                            <td>92-96 cm</td>
+                        </tr>
+                        <tr>
+                            <td><strong>M</strong></td>
+                            <td>90-94 cm</td>
+                            <td>70-74 cm</td>
+                            <td>96-100 cm</td>
+                        </tr>
+                        <tr>
+                            <td><strong>L</strong></td>
+                            <td>94-100 cm</td>
+                            <td>74-80 cm</td>
+                            <td>100-106 cm</td>
+                        </tr>
+                        <tr>
+                            <td><strong>XL</strong></td>
+                            <td>100-106 cm</td>
+                            <td>80-86 cm</td>
+                            <td>106-112 cm</td>
+                        </tr>
+                        <tr>
+                            <td><strong>XXL</strong></td>
+                            <td>106-112 cm</td>
+                            <td>86-92 cm</td>
+                            <td>112-118 cm</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div style="margin-top: var(--space-lg); text-align: center;">
+            <a href="smart-fit.html" class="btn btn-smart" style="width: 100%; border-radius: 20px;">Let AI Measure You
+                Instantly</a>
+        </div>
+
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg>
+            <span>Home</span>
+        </a>
+        <a href="shop.html" class="nav-item">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="9" cy="21" r="1"></circle>
+                <circle cx="20" cy="21" r="1"></circle>
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+            </svg>
+            <span>Shop</span>
+        </a>
+        <a href="smart-fit.html" class="nav-item" style="color: var(--color-primary);">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                style="background: var(--color-accent); border-radius: 50%; padding: 4px;">
+                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                <circle cx="12" cy="13" r="4"></circle>
+            </svg>
+            <span>Scan</span>
+        </a>
+        <a href="cart.html" class="nav-item" style="position: relative;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <path d="M16 10a4 4 0 0 1-8 0"></path>
+            </svg>
+            <span class="badge-count" id="bot-cart-count" style="top: -5px; right: -5px;">0</span>
+            <span>Cart</span>
+        </a>
+        <a href="profile.html" class="nav-item">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span>Profile</span>
+        </a>
+    </nav>
+
+    <script src="js/main.js"></script>
+    <script>
+        function updateBadges() {
+            let cart = JSON.parse(localStorage.getItem('mirrorverse_cart')) || [];
+            if (document.getElementById('bot-cart-count')) {
+                document.getElementById('bot-cart-count').innerText = cart.length;
+            }
+        }
+        document.addEventListener('DOMContentLoaded', updateBadges);
+    </script>
+</body>
+
+</html>
