@@ -1,5 +1,5 @@
 // js/smart-fit.js
-const GEMINI_API_KEY = "AIzaSyCT5inBXMbfnq41B_f_y86PGWM0adNnX7g";
+const GEMINI_API_KEY = "AIzaSyCJESz0_BYUgQKeIzfJg10TafXEIEl058g";
 
 const videoElement = document.getElementById('live-video');
 const canvasElement = document.getElementById('output-canvas');
@@ -167,9 +167,9 @@ async function fetchMatches(sizeString) {
         if (!res.ok) throw new Error("API Connection Failed");
 
         const data = await res.json();
-        let matches = data.dresses;
+        let matches = data.data ? data.data.slice(0, 8) : [];
 
-        document.getElementById('match-count').innerText = data.totalItems;
+        document.getElementById('match-count').innerText = data.pagination ? data.pagination.total : matches.length;
 
         matchContainer.innerHTML = matches.map(m => `
             <a href="product.html?id=${m.id}" class="match-card">
@@ -184,11 +184,11 @@ async function fetchMatches(sizeString) {
                         ${m.name}
                     </h4>
                     <div style="display: flex; gap: 4px; align-items: baseline; margin-top: 4px;">
-                        <span style="font-size: 16px; font-weight: 700; color: #0f1111;">$${m.price.toFixed(2)}</span>
-                        <span style="font-size: 11px; text-decoration: line-through; color: #565959;">$${m.originalPrice.toFixed(2)}</span>
+                        <span style="font-size: 16px; font-weight: 700; color: #0f1111;">₹${m.price.toLocaleString('en-IN')}</span>
+                        <span style="font-size: 11px; text-decoration: line-through; color: #565959;">₹${(m.originalPrice || 0).toLocaleString('en-IN')}</span>
                     </div>
                     <div style="font-size: 10px; color: #007185; margin-top: 4px; font-weight: 600;">
-                        Perfect Fit for ${sizeString}
+                        Available: ${m.availableSizes}
                     </div>
                 </div>
             </a>

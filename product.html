@@ -98,7 +98,7 @@
         }
 
         .amazon-price::before {
-            content: "$";
+            content: "₹";
             font-size: 14px;
             vertical-align: super;
             margin-right: 2px;
@@ -264,9 +264,37 @@
             }
 
             try {
-                const response = await fetch('data/products.json');
-                const products = await response.json();
-                const product = products.find(p => p.id === productId);
+                let product = null;
+                try {
+                    const res = await fetch('http://localhost:5000/api/dresses/' + productId);
+                    if (res.ok) {
+                        const data = await res.json();
+                        // Normalise field names between API and static JSON
+                        product = data;
+                        const rawSizes = data.sizes || data.availableSizes || [];
+                        product.sizes = Array.isArray(rawSizes) ? rawSizes : String(rawSizes).split(',').map(s => s.trim()).filter(Boolean);
+                        product.reviews = data.reviews || data.ratingCount || 0;
+                        product.price = parseFloat(data.price) || 0;
+                        product.originalPrice = data.originalPrice || Math.round(product.price * 1.33);
+                        product.rating = parseFloat(data.rating) || 0;
+                    }
+                } catch (e) {
+                    console.log("API not available, falling back to static JSON...");
+                }
+
+                if (!product) {
+                    const response = await fetch('data/products.json?v=' + Date.now());
+                    const products = await response.json();
+                    product = products.find(p => String(p.id) === String(productId));
+                    if (product) {
+                        const rawSizes = product.sizes || product.availableSizes || [];
+                        product.sizes = Array.isArray(rawSizes) ? rawSizes : String(rawSizes).split(',').map(s => s.trim()).filter(Boolean);
+                        product.price = parseFloat(product.price) || 0;
+                        product.originalPrice = product.originalPrice || Math.round(product.price * 1.33);
+                        product.reviews = product.reviews || product.ratingCount || 0;
+                        product.rating = parseFloat(product.rating) || 0;
+                    }
+                }
 
                 if (!product) {
                     container.innerHTML = '<div style="padding: 40px; text-align: center;">Product not found.</div>';
@@ -295,7 +323,7 @@
                     <h1 class="prod-title">${product.name}</h1>
                     <div class="rating-container">
                         <div class="stars-svg">${starsHTML}</div>
-                        <span class="rating-count" style="font-size: 14px;">${product.ratingCount.toLocaleString()} ratings</span>
+                        <span class="rating-count" style="font-size: 14px;">${Number(product.reviews || 0).toLocaleString()} ratings</span>
                     </div>
                 </div>
 
@@ -303,13 +331,13 @@
                     <div style="display: flex; align-items: baseline; gap: 4px;">
                         <span style="font-size: 14px; font-weight: 500; color: var(--color-error);">-25%</span>
                         <div class="price-container" style="color: var(--color-error); font-size: 28px;">
-                            <span class="price-symbol" style="font-size: 16px;">$</span>
-                            <span class="price-whole">${Math.floor(product.price)}</span>
+                            <span class="price-symbol" style="font-size: 16px;">₹</span>
+                            <span class="price-whole">${Math.floor(product.price).toLocaleString('en-IN')}</span>
                             <span class="price-decimal" style="font-size: 16px;">${(product.price % 1).toFixed(2).split('.')[1]}</span>
                         </div>
                     </div>
                     <div style="font-size: 13px; color: var(--color-text-muted); margin-top: 4px;">
-                        Typical price: <span style="text-decoration: line-through;">$${product.originalPrice}</span>
+                        Typical price: <span style="text-decoration: line-through;">₹${(product.originalPrice || 0).toLocaleString('en-IN')}</span>
                     </div>
                     <div class="delivery-badge" style="margin-top: 12px; font-size: 14px;">
                         ${product.freeDelivery ? '<span class="free-delivery">FREE delivery</span>' : ''} Tomorrow, <b>March 1</b>.
@@ -337,7 +365,7 @@
                     </div>
 
                     <button class="buy-btn-amazon btn-add-to-cart" onclick="addToCart(event, '${product.id}')" style="background: #FFD814; border-color: #FCD200; border-radius: 20px; width: 100%; padding: 12px; font-weight: 500; margin-bottom: 10px; border: 1px solid;">Add to Cart</button>
-                    <button class="buy-btn-amazon btn-buy-now" style="background: #FFA41C; border-color: #FF8F00; border-radius: 20px; width: 100%; padding: 12px; font-weight: 500; border: 1px solid;">Buy Now</button>
+                    <button class="buy-btn-amazon btn-buy-now" onclick="window.location.href='checkout.html?buynow=${product.id}'" style="background: #FFA41C; border-color: #FF8F00; border-radius: 20px; width: 100%; padding: 12px; font-weight: 500; border: 1px solid;">Buy Now</button>
                 </div>
 
                 <div style="padding: 16px; border-top: 8px solid #f0f2f2;">

@@ -6,7 +6,7 @@ import sys
 
 def run_app():
     base_dir = os.path.dirname(os.path.abspath(__file__))
-    frontend_dir = os.path.join(base_dir, 'frontend')
+    frontend_dir = base_dir
 
     print("🚀 MIRRORVERSE – SMART FIT RECOMMENDATION (Amazon-Style AI)")
 

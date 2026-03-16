@@ -16,8 +16,22 @@ async function initCart() {
   }
 
   try {
-    const response = await fetch('data/products.json');
-    const products = await response.json();
+    let products = [];
+    try {
+        const res = await fetch('http://localhost:5000/api/dresses');
+        if (res.ok) {
+            const result = await res.json();
+            products = result.data;
+        }
+    } catch (e) {
+        console.log("API not available, falling back to static JSON...");
+    }
+
+    if (!products.length) {
+        const response = await fetch('frontend/data/products.json?v=' + Date.now());
+        products = await response.json();
+    }
+
     renderCart(container, products);
   } catch (err) {
     console.error("Error loading cart products", err);
@@ -43,7 +57,7 @@ function renderCart(container, products) {
   cart.forEach(id => counts[id] = (counts[id] || 0) + 1);
 
   Object.keys(counts).forEach(id => {
-    const product = products.find(p => p.id === id);
+    const product = products.find(p => String(p.id) === String(id));
     if (product) {
       cartItems.push({ ...product, quantity: counts[id] });
     }
@@ -61,7 +75,7 @@ function renderCart(container, products) {
                 <div style="font-size: 13px; color: #565959; margin-bottom: 8px;">
                     Size: <b>M</b> | Qty: <b>${item.quantity}</b>
                 </div>
-                <div style="font-size: 18px; font-weight: 700; color: #0f1111; margin-bottom: 12px;">$${item.price.toFixed(2)}</div>
+                <div style="font-size: 18px; font-weight: 700; color: #0f1111; margin-bottom: 12px;">₹${item.price.toLocaleString('en-IN')}</div>
                 <div style="display: flex; gap: 12px;">
                     <button onclick="removeFromCart('${item.id}')" style="background: #fff; border: 1px solid var(--color-border); padding: 6px 14px; border-radius: 8px; font-size: 12px; box-shadow: 0 2px 5px rgba(15,17,17,.15); cursor: pointer;">Delete</button>
                     <button style="background: #fff; border: 1px solid var(--color-border); padding: 6px 14px; border-radius: 8px; font-size: 12px; box-shadow: 0 2px 5px rgba(15,17,17,.15); cursor: pointer;">Save for later</button>
@@ -73,9 +87,9 @@ function renderCart(container, products) {
   container.innerHTML = `
         <div class="cart-subtotal-box" style="background: white; padding: 20px; border-bottom: 1px solid var(--color-border); margin-bottom: 12px;">
             <div style="font-size: 18px; color: #0f1111;">
-                Subtotal (${totalItems} item${totalItems !== 1 ? 's' : ''}): <span style="font-weight: 700;">$${subtotal.toFixed(2)}</span>
+                Subtotal (${totalItems} item${totalItems !== 1 ? 's' : ''}): <span style="font-weight: 700;">₹${subtotal.toLocaleString('en-IN')}</span>
             </div>
-            <button class="btn-checkout-amazon" onclick="alert('Proceeding to Checkout...') " style="background: #FFD814; border: 1px solid #FCD200; border-radius: 8px; width: 100%; padding: 12px; font-weight: 500; margin-top: 12px; cursor: pointer;">Proceed to Checkout</button>
+            <button class="btn-checkout-amazon" onclick="window.location.href='checkout.html'" style="background: #FFD814; border: 1px solid #FCD200; border-radius: 8px; width: 100%; padding: 12px; font-weight: 500; margin-top: 12px; cursor: pointer;">Proceed to Checkout</button>
         </div>
         <div class="cart-items-list">
             ${itemsHTML}

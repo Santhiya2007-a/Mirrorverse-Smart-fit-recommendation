@@ -91,14 +91,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function loadFeatured(grid) {
     try {
-        const products = await api.getProducts(state.gender);
-        grid.innerHTML = products.slice(0, 4).map(p => renderCard(p)).join('');
+        const response = await api.getProducts({ gender: state.gender });
+        const products = response.data || response; // Handle both array and object responses
+        if (Array.isArray(products)) {
+            grid.innerHTML = products.slice(0, 4).map(p => renderCard(p)).join('');
+        }
     } catch (err) {
         console.error("Load featured failed:", err);
     }
 }
 
 export function renderCard(p, isPersonalized = false) {
+    console.log('Rendering elite card for:', p.id, p.name);
     return `
         <div class="product-card" data-id="${p.id}">
             <a href="product.html?id=${p.id}" style="text-decoration:none; color:inherit;">
@@ -111,21 +115,30 @@ export function renderCard(p, isPersonalized = false) {
                     ${'★'.repeat(Math.floor(p.rating))}${p.rating % 1 !== 0 ? '½' : ''} 
                     <span style="color:var(--text-muted); font-size:0.8rem; margin-left:5px;">(${p.reviews})</span>
                 </div>
-                <div class="price-box">$${p.price.toFixed(2)}</div>
+                <div class="price-box">₹${p.price.toLocaleString('en-IN')}</div>
             </a>
-            <button class="btn btn-primary add-to-cart-btn" data-id="${p.id}">
-                <i class="fas fa-plus"></i> Add to Bag
-            </button>
+            <div style="display:flex; gap:8px; margin-top:10px;">
+                <button class="btn btn-primary add-to-cart-btn" data-id="${p.id}" style="flex:1;">
+                    <i class="fas fa-plus"></i> Bag
+                </button>
+                <button class="btn btn-buy buy-now-btn" data-id="${p.id}" style="flex:1;">
+                     Buy Now
+                </button>
+            </div>
         </div>
     `;
 }
 
-// Global listener for Add to Cart
+// Global listener for Add to Cart and Buy Now
 document.addEventListener('click', async (e) => {
     if (e.target.classList.contains('add-to-cart-btn')) {
         const id = e.target.dataset.id;
         const product = await api.getProduct(id);
         state.addToCart(product);
         alert(`Elite purchase added: ${product.name}`);
+    }
+    if (e.target.classList.contains('buy-now-btn')) {
+        const id = e.target.dataset.id;
+        window.location.href = 'checkout.html?buynow=' + id;
     }
 });

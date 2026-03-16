@@ -45,7 +45,7 @@
                 <div class="purchase-box" style="margin-top: 2rem;">
                     <button id="add-to-cart-big" class="btn btn-primary"
                         style="margin-bottom: 10px; padding: 1.5rem; font-size: 1.2rem;">Add to Cart</button>
-                    <button class="btn btn-secondary" style="padding: 1.5rem; font-size: 1.2rem;">Buy Now</button>
+                    <button id="buy-now-big" class="btn btn-buy" style="padding: 1.5rem; font-size: 1.2rem; background-color: #ffa41c; color: #111;">Buy Now</button>
                 </div>
             </div>
         </div>
@@ -65,7 +65,7 @@
             const p = await api.getProduct(id);
             document.getElementById('pd-name').innerText = p.name;
             document.getElementById('pd-img').src = p.image;
-            document.getElementById('pd-price').innerText = `$${p.price.toFixed(2)}`;
+            document.getElementById('pd-price').innerText = `₹${Math.round(p.price).toLocaleString('en-IN')}`;
             document.getElementById('pd-description').innerText = p.description;
             document.getElementById('pd-rating').innerHTML = `★`.repeat(Math.floor(p.rating)) + ` ${p.reviews} views`;
 
@@ -81,6 +81,10 @@
             document.getElementById('add-to-cart-big').onclick = () => {
                 state.addToCart(p);
                 alert(`Added to elite cart: ${p.name}`);
+            };
+
+            document.getElementById('buy-now-big').onclick = () => {
+                window.location.href = 'checkout.html?buynow=' + p.id;
             };
         }
 

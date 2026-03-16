@@ -242,6 +242,18 @@ header {
     box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.3);
 }
 
+.btn-buy {
+    background-color: #ffa41c; /* Amazon style yellow */
+    color: #111;
+    box-shadow: 0 4px 6px -1px rgba(255, 164, 28, 0.2);
+}
+
+.btn-buy:hover {
+    background-color: #FFB700;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(255, 164, 28, 0.3);
+}
+
 .btn-secondary {
     background-color: var(--primary);
     color: var(--white);

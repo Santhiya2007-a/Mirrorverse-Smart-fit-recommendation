@@ -21,7 +21,7 @@ export function renderCart() {
             </div>
         `;
         if (subtotalCount) subtotalCount.innerText = "0";
-        if (subtotalPrice) subtotalPrice.innerText = "$0.00";
+        if (subtotalPrice) subtotalPrice.innerText = "₹0";
         return;
     }
 
@@ -39,13 +39,13 @@ export function renderCart() {
                     <button style="background: none; border: none; color: var(--accent); cursor: pointer; font-size: 0.85rem; font-weight: 600;">Save for later</button>
                 </div>
             </div>
-            <div style="font-weight: 800; font-size: 1.25rem; color: var(--primary); align-self: center;">$${(item.price * item.quantity).toFixed(2)}</div>
+            <div style="font-weight: 800; font-size: 1.25rem; color: var(--primary); align-self: center;">₹${(item.price * item.quantity).toLocaleString('en-IN')}</div>
         </div>
     `).join('');
 
     const total = cart.reduce((acc, item) => acc + (item.price * item.quantity), 0);
     if (subtotalCount) subtotalCount.innerText = state.getCartCount();
-    if (subtotalPrice) subtotalPrice.innerText = `$${total.toFixed(2)}`;
+    if (subtotalPrice) subtotalPrice.innerText = `₹${total.toLocaleString('en-IN')}`;
 
     // Add Remove Listeners
     container.querySelectorAll('.remove-btn').forEach(btn => {

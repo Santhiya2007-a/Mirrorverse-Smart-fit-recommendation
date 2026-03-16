@@ -125,8 +125,20 @@
         // Load dresses from products.json
         async function loadDresses() {
             try {
-                const response = await fetch('data/products.json');
-                allDresses = await response.json();
+                try {
+                    const res = await fetch('http://localhost:5000/api/dresses');
+                    if (res.ok) {
+                        const result = await res.json();
+                        allDresses = result.data;
+                    }
+                } catch (e) {
+                    console.log("API not available, falling back to static JSON...");
+                }
+
+                if (!allDresses.length) {
+                    const response = await fetch('frontend/data/products.json?v=' + Date.now());
+                    allDresses = await response.json();
+                }
                 filteredDresses = allDresses;
                 renderDresses();
                 updateResultsCount();
@@ -190,9 +202,8 @@
                     <p style="font-size:12px; color:#565959; margin-bottom:4px;">${boughtCount * 3}+ bought in past month</p>
 
                     <div style="display:flex; align-items: baseline; gap: 2px;">
-                        <span style="font-size: 13px; font-weight: 700; align-self: flex-start; margin-top: 2px; color: #0f1111;">$</span>
-                        <span style="font-size: 21px; font-weight: 700; color: #0f1111;">${Math.floor(product.price)}</span>
-                        <span style="font-size: 13px; font-weight: 700; align-self: flex-start; margin-top: 2px; color: #0f1111;">${(product.price % 1).toFixed(2).split('.')[1]}</span>
+                        <span style="font-size: 13px; font-weight: 700; align-self: flex-start; margin-top: 2px; color: #0f1111;">₹</span>
+                        <span style="font-size: 21px; font-weight: 700; color: #0f1111;">${Math.floor(product.price).toLocaleString('en-IN')}</span>
                     </div>
 
                     <div style="font-size: 11px; color: #565959; margin-top: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
